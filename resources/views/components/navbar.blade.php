@@ -1,33 +1,19 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary rounded" aria-label="Thirteenth navbar example">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg  rounded bg-primary" aria-label="Thirteenth navbar example">
+    <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-        <a class="navbar-brand col-lg-3 me-0" href="#">Centered nav</a>
-        <ul class="navbar-nav col-lg-6 justify-content-lg-center">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
+        <a class="navbar-brand col-lg-3 me-0" href="#"> <img src="/image/bali.png" alt="" srcset="" width="150"></a>
+        <ul class="text-center col-lg-6 justify-content-lg-center list-unstyled text-white">
+
+            <li class="fw-bold fs-2">Pemerintah Provinsi Bali</li>
+            <li class="fs-5">Jln Gunung Bromo raya no 6, Denpasar Barat, Bali (801119)</li>
+            <li class="fs-5">Telp : (0361)4711523, Email: info@dalsfindo.gov</li>
+            <li class="fs-5">Website : dalsfindo.id</li>
         </ul>
-        <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-          <button class="btn btn-primary">Button</button>
-        </div>
+
       </div>
     </div>
   </nav>
