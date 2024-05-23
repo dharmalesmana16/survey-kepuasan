@@ -20,6 +20,8 @@ class Responden extends Controller
     {
         $startDate = $request->input("startDate");
         $grouping = $request->input("grouping");
+        $tanggalAwal = $request->input('tanggalAwal');
+        $tanggalAkhir = $request->input("tanggalAkhir");
         // $endDate = $request->input("endDate");
         // if ($startDate != null && $endDate != null){
 
@@ -29,25 +31,35 @@ class Responden extends Controller
             return response()->json([
                 "data" => $data
             ]);
-        }
-        if ($grouping == "yes") {
+        } else if ($grouping == "yes") {
             $data = DB::table('tb_responden')->selectRaw("count(jawaban) as totalGrouping")->whereRaw("date(created_at) = CURRENT_DATE()")
                 ->groupBy("jawaban")->orderByDesc("jawaban")->get();
             return response()->json([
                 "data" => $data
             ]);
-            return $data;
-        }
-        $data = $this->data::all();
-        if ($data) {
+            // return $data;
+        } else if ($tanggalAwal != null && $tanggalAkhir != null && $grouping == "true") {
+            $data = DB::table("tb_responden")->selectRaw("jawaban")->whereRaw("created_at between
+            '$tanggalAwal' and '$tanggalAkhir'")->get();
+            $grouping = DB::table('tb_responden')->selectRaw("count(jawaban) as totalGrouping")->whereRaw("created_at between
+            '$tanggalAwal' and '$tanggalAkhir'")
+                ->groupBy("jawaban")->orderByDesc("jawaban")->get();
             return response()->json([
-                "data" => $data
-            ]);
-        } else {
-            return response()->json([
-                "msg" => "no data"
+                "data" => $data,
+                "grouping" => $grouping
             ]);
         }
+
+        // $data = $this->data::all();
+        // if ($data) {
+        //     return response()->json([
+        //         "data" => $data
+        //     ]);
+        // } else {
+        //     return response()->json([
+        //         "msg" => "no data"
+        //     ]);
+        // }
     }
     public function show($id = null)
     {

@@ -44,7 +44,7 @@
     <aside class="sidebar-nav-wrapper overflow-hidden aside">
         <div class="navbar-logo">
             <a href="{{ url('/') }}  ">
-                <img src="/image/bali.png" alt="logo" class="img-fluid " width="100" />
+                <img src="/image/logonew.png" alt="logo" class="img-fluid shadow  rounded" width="100" />
             </a>
         </div>
         <nav class="sidebar-nav">
@@ -88,6 +88,16 @@
                     </a>
                 </li>
             </ul>
+            <ul class="navMenus">
+                <li class="nav-item ">
+                    <a href="{{ url('/dashboard/user') }}" class="active text-main">
+                        <span class="icon">
+                            <i class="fa-sharp fa-solid fa-gauge"></i>
+                        </span>
+                        Manajemen User
+                    </a>
+                </li>
+            </ul>
         </nav>
 
     </aside>
@@ -103,8 +113,10 @@
                     <div class="col-6 ">
                         <div class="header-left d-flex align-items-center">
                             <div class="menu-toggle-btn mr-20">
-                                <button id="menu-toggle" class="main-btn primary-btn btn-hover menuBtn">
-                                    <i class="lni lni-chevron-left me-2"></i> Menu
+                                <button id="menu-toggle" class="main-btn btn-hover menuBtn text-white"
+                                    style="background-color: #f3343e">
+                                    {{-- <i class="lni lni-chevron-left me-2"></i> --}}
+                                    Menu
                                 </button>
 
                                 <!-- <img src="/images/jbt.png" alt="logo" class="img-fluid" style="width:10%" /> -->
@@ -112,12 +124,7 @@
                             </div>
 
                         </div>
-                        {{-- <div class="action mr-10 text-white">
-                            <p >ANEMOMETER JALAN TOL BALI MANDARA BERBASIS IOT</p>
-                            <p >PT. JASAMARGA BALI TOL</p>
-                            <p id="clock">
-                            </p>
-                        </div> --}}
+
                     </div>
 
                     <div class="col-6 ">

@@ -18,7 +18,7 @@
 
     <x-navbar />
 
-    <main class="py-5">
+    <main class="py-3">
         @yield('content')
     </main>
     <x-footer />

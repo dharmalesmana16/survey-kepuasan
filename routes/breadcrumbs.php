@@ -23,8 +23,21 @@ Breadcrumbs::for('Layanan', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push("Layanan");
 });
+Breadcrumbs::for('Responden', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push("Responden");
+});
 Breadcrumbs::for('newLayanan', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push("Layanan", route('layanan'));
     $trail->push("Tambah Layanan");
+});
+Breadcrumbs::for('newUser', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push("user", '/dashboard/user');
+    $trail->push("Tambah User");
+});
+Breadcrumbs::for('User', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push("Manajemen User");
 });

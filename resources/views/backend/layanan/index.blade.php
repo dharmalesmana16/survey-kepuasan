@@ -31,10 +31,10 @@
                 <div class="card myCard">
                     <div class="text-center">
 
-                        <img src="/storage/{{ $res['icon'] }}" width="250" class="">
+                        <img src="/storage/{{ $res['icon'] }}" width="200" class="img-fluid">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title display-5 text-center ">{{ $res['nama_pelayanan'] }}</h5>
+                        <h3 class=" text-center">{{ $res['nama_pelayanan'] }}</h3>
 
                     </div>
                 </div>

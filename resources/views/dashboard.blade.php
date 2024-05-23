@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="card-style p-4 pb-0 mb-3">
+    <div class="card-style p-4 pb-0 mb-3 ">
         <div class="card-body">
 
 
@@ -30,7 +30,7 @@
                         Total Jawaban
                     </h6>
                     <div class="card-body text-center align-items-center align-content-center p-3">
-                        <h5 class="display-5 fw-bold pt-3" id="ansToday">100</h5>
+                        <h5 class="display-5 fw-bold pt-3" id="ansToday">-</h5>
                         <p class="fs-5 fw-light"> Jawaban</p>
                     </div>
                 </div>

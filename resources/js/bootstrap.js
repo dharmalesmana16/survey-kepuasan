@@ -6,7 +6,7 @@
 
 import axios from 'axios';
 import Swal from 'sweetalert2';
-
+import $ from 'jquery';
 // window.dataTable =jqueryDataTables
 window.Swal = Swal;
 // window.FormData = new FormData;
@@ -41,13 +41,13 @@ function updateClock() {
     $("#clock").html(currentTimeString);
     // $("#hari").html(hari[day]);
 }
-$(document).ready(function () {
+// $(document).ready(function () {
     updateClock()
 
     setInterval(() => {
         updateClock()
     }, 1000);
-});
+// });
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
