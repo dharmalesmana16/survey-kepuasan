@@ -5,6 +5,11 @@
  */
 
 import axios from 'axios';
+import Swal from 'sweetalert2';
+
+// window.dataTable =jqueryDataTables
+window.Swal = Swal;
+// window.FormData = new FormData;
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -15,7 +20,7 @@ function updateClock() {
 
     let currentTime = new Date();
     let day = currentTime.getDay();
-    let currentDay = currentTime.getDay();
+    let currentDay = currentTime.getDate();
     let currentMonth = currentTime.getMonth();
     let currentYear = currentTime.getFullYear();
     // Operating System Clock Hours for 12h clock

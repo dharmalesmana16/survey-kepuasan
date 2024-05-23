@@ -1,0 +1,17 @@
+
+
+:root {
+    /* main color */
+    --blue: #1956a3;
+    --white: #ffffff;
+    --yellow: #2b2b2b;
+    --black: #2b2b2b;
+    --gray: #ecf0f1;
+}
+.text-main{
+    color: var(--white) !important;
+}
+.myCard{
+    border-radius: 40px;
+
+}

@@ -17,6 +17,10 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
-        "bootstrap": "^5.3.3"
+        "bootstrap": "^5.3.3",
+        "datatables": "^1.10.18",
+        "form-data": "^4.0.0",
+        "highcharts": "^11.4.1",
+        "sweetalert2": "^11.11.0"
     }
 }
