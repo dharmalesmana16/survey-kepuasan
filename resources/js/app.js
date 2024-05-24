@@ -104,6 +104,7 @@ let grafikPie = Highcharts.chart('pieChart', {
         type: 'pie'
     },
     credits:false,
+    // categories:["Sangat Puas"],
     title: {
         text: 'Jawaban berdasarkan persentase',
         align: 'left'
@@ -137,19 +138,19 @@ let grafikPie = Highcharts.chart('pieChart', {
         colorByPoint: true,
         data: [{
             name: 'Sangat Puas',
-            y: 0
+            // y: 0    
         }, {
             name: 'Puas',
-            y: 0
+            // y: 0
         }, {
             name: 'Cukup Puas',
-            y: 0
+            // y: 0
         }, {
             name: 'Kurang Puas',
-            y: 0
+            // y: 0
         }, {
             name: 'Buruk',
-            y: 0
+            // y: 0
         }]
     }]
 });
