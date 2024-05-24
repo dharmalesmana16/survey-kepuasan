@@ -10,42 +10,75 @@ import { grafikPie,grafikBar } from './app';
 //     }
 // }
 // getTotalAnswer();
-setTimeout(() => {
   
 
 axios.get('/api/responden?startDate=today')
   .then((response) => {
     let totalJawaban = response.data;
+    let sumAnswer =0;
+    let textTampilanAnswer ="";
+    let totalAnswer = totalJawaban.data.length
+    $('#ansToday').text(totalAnswer);
+    console.log(totalJawaban.data);
+    for(let i =0;i<totalJawaban.data.length;i++){
+      sumAnswer = sumAnswer + totalJawaban.data[i].jawaban
+    }
+    
+    let result = Math.round(sumAnswer/totalAnswer)
+    if(result == 5){
+      textTampilanAnswer = "Sangat Puas"
+    }else if (result== 4){
+      textTampilanAnswer = "Puas"
+    }else if (result == 3){
+      textTampilanAnswer = "Cukup Puas"
+    }else if(result == 2){
+      textTampilanAnswer = "Kurang Puas"
+    }else{
+      textTampilanAnswer = "Buruk"
+    }
+    $("#tampilanAnswer").attr("src",`/image/${result}.png`);
+    $('#textTampilanAnswer').text(textTampilanAnswer);
 
-    $('#ansToday').text(totalJawaban.data.length);
-    // console.log(totalJawaban.data[0].jawaban)
-    // grafikBar.series[0].setData([
-    //     1,2,3,4,5
-    // ]);
+
 });
 axios.get('/api/responden?grouping=yes')
   .then((response) => {
     let groupingJawaban = response.data;
-  
     let dataGrouping=[];
-    console.log(groupingJawaban);
+    let dataPieGrafic =[];
+    let jawaban;
+    
     for(let i =0;i<groupingJawaban.data.length;i++){
-      dataGrouping.push(groupingJawaban.data[i].totalGrouping)
-    }
-    console.log(dataGrouping)
-    // $('#ansToday').text(totalJawaban.data.length);
-    // // console.log(totalJawaban.data[0].jawaban)
+      let dataObj ={};
+      let nameAnswer =groupingJawaban.data[i].jawaban
+      if(nameAnswer == 5){
+        nameAnswer = "Sangat Puas"
+      }else if (nameAnswer== 4){
+        nameAnswer = "Puas"
+      }else if (nameAnswer == 3){
+        nameAnswer = "Cukup Puas"
+      }else if(nameAnswer == 2){
+        nameAnswer = "Kurang Puas"
+      }else{
+        nameAnswer = "Buruk"
+      }
+      dataObj["name"]=nameAnswer;
+
+      dataObj["y"]=groupingJawaban.data[i].totalGrouping;
+      dataPieGrafic.push(dataObj);
+    } 
+    
     grafikBar.series[0].setData(
-      dataGrouping
+      dataPieGrafic
     );
     grafikPie.series[0].update({
       // name:["Sangat Puas","Puas","Cukup Puas","Kurang Puas","Buruk"],
-      data: dataGrouping
+      data: dataPieGrafic
   }, true);
+
    
 });
 
-}, 500);
 const tanggal_mulai = {
 
   enableTime: true,
@@ -55,8 +88,8 @@ const tanggal_mulai = {
   dateFormat: "Y-m-d H:i",
 
 };
-
-flatpickr('.tanggalAwal', tanggal_mulai);
+// diganti
+flatpickr('.tanggalAwal', tanggal_mulai); //tambahan icon
 const tanggal_akhir = {
 
   enableTime: true,

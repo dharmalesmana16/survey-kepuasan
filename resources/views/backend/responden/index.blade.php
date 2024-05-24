@@ -86,8 +86,8 @@
                         Tampilan Jawaban
                     </h6>
                     <div class="card-body text-center align-items-center align-content-center ">
-                        <img src="/image/5.png" alt="" srcset="" width="150">
-                        <p class="fs-5 fw-light"> Sangat Puas</p>
+                        <img src="/image/5.png" alt="" srcset="" width="150" id="tampilanAnswer">
+                        <p class="fs-5 fw-light" id="textTampilanAnswer">-</p>
                     </div>
                 </div>
             </div>
