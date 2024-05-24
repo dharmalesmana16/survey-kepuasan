@@ -55,8 +55,8 @@ const tanggal_mulai = {
   dateFormat: "Y-m-d H:i",
 
 };
-
-flatpickr('.tanggalAwal', tanggal_mulai); //tambahan
+// diganti
+flatpickr('.tanggalAwal', tanggal_mulai); //tambahan icon
 const tanggal_akhir = {
 
   enableTime: true,
