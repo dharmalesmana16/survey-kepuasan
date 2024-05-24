@@ -8,6 +8,11 @@ use App\Models\respondenModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Mike42\Escpos\Printer;
+use Illuminate\Support\Facades\Storage;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\EscposImage;
 
 class Responden extends Controller
 {
@@ -82,6 +87,12 @@ class Responden extends Controller
     }
     public function store(Request $request)
     {
+        function title(Printer $printer, $text)
+        {
+            $printer->selectPrintMode(Printer::MODE_EMPHASIZED);
+            $printer->text("\n" . $text);
+            $printer->selectPrintMode(); // Reset
+        }
         $dataAnswer = ["Sangat Puas", "Puas", "Cukup Puas", "Kurang Puas", "Buruk"];
 
         $dataLayanan = new groupModel();
@@ -112,6 +123,68 @@ class Responden extends Controller
             $komentar = $dataAnswer[4];
             $jawabanE = 1;
         }
+        // function indonesiaFormat($waktu){
+        $date = date('N-d-n-Y-H:i:s');
+
+        $hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
+        $bulan = array(
+            1 => 'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember',
+        );
+        $res = explode("-", $date);
+
+        // $response =  $hari[$res] . " ". $res[1] ." " .$bulan[$res[2]] . " " . $res[3] . " ". $res[4];
+        // }
+
+
+        $connector = new WindowsPrintConnector("POS-80C");
+        // $logo = EscposImage::load("/logonew.png",false);
+        $printer = new Printer($connector);
+
+        $printer->setJustification(Printer::JUSTIFY_CENTER);
+
+        $printer->setTextSize(1, 2);
+        $printer->text("Pemerintah Kabupaten Gianyar\n");
+        $printer->setTextSize(1, 2);
+        $printer->text("Perpustakaan Daerah Nawaksara.\n");
+
+        $printer->setTextSize(1, 1);
+        $printer->text("Alamat : Jalan Ciung Wanara No.24\n");
+        $printer->text("Email : kpadgianyar@gmail.com, Telp : (0361) 4794808\n");
+        $printer->text("------------------------------------------------");
+        $printer->feed(2);
+        $printer->setEmphasis(true);
+
+        $printer->setTextSize(2, 2);
+        $printer->text("Penilaian anda :\n");
+        $printer->setEmphasis(true);
+        $printer->text($komentar . "\n\n");
+        $printer->setEmphasis(false);
+        $printer->setTextSize(1, 1);
+        // foreach(array(512, 256, 128, 64) as $width) {
+
+        // }
+        // print nambah
+        $printer->feed(2);
+        $printer->setJustification(Printer::JUSTIFY_CENTER);
+        $printer->text("Perpustakaan Daerah Nawaksara\n");
+        $printer->text("Terimakasih telah berpartisipasi dalam melakukan peniaian\n");
+        $printer->feed(2);
+        $printer->text($hari[$res[0]] . ", " . $res[1] . " " . $bulan[$res[2]] . " " . $res[3] . " " . $res[4] . "\n");
+        $printer->feed(2);
+        $printer->cut();
+        $printer->close();
+
         $data = [
             'nama' => $nama,
             'jawaban' => $jawaban,
