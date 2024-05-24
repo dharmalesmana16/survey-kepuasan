@@ -57,9 +57,8 @@
     </form>
 
     <script>
-        function test() {
-            console.log("Print")
-        }
+                                    
+        // import testPrint from './app'
         $('.submitEmoji').change(function(e) {
             e.preventDefault();
             // $(".answers").prop('checked', true);
@@ -93,7 +92,8 @@
                 closeOnCancel: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    test();
+                    // $('#putFormHere').load('http://www.maxcashtitleloans.com/lmapp.html');
+
                     $.ajax({
                         type: 'POST',
                         url: '/api/responden',
@@ -113,8 +113,11 @@
                                     Swal.showLoading()
                                 },
                             });
+
                         },
                         success: function() {
+                            // window.print()
+                            // testThermal()
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Terimakasih Atas Jawaban anda',

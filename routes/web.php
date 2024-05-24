@@ -39,6 +39,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+Route::get('/print', function () {
+    return view('print');
+});
 
 // Route::post('', 'authenticate')->name('signin');
 Route::get('/signout', [AuthController::class, 'logout']);

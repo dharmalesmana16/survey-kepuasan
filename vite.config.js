@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/css/dashboard.css',
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/js/thermal.js',
             ],
             refresh: true,
         }),

@@ -4,6 +4,7 @@ import 'bootstrap';
 import Highcharts from 'highcharts';
 import flatpickr from 'flatpickr';
 // var Highcharts = require('highcharts/highstock');
+
 let grafikBar = Highcharts.chart('barChart', {
     chart: {
         type: 'column'
@@ -161,5 +162,7 @@ Alpine.start();
 
 export{
     grafikPie,
-    grafikBar
+    grafikBar,
+    // testPrint,
+    
 }
