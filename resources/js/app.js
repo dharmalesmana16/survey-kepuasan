@@ -137,19 +137,19 @@ let grafikPie = Highcharts.chart('pieChart', {
         colorByPoint: true,
         data: [{
             name: 'Sangat Puas',
-            y: 100
+            y: 0
         }, {
             name: 'Puas',
-            y: 1
+            y: 0
         }, {
             name: 'Cukup Puas',
-            y: 2
+            y: 0
         }, {
             name: 'Kurang Puas',
-            y: 3
+            y: 0
         }, {
             name: 'Buruk',
-            y: 2
+            y: 0
         }]
     }]
 });

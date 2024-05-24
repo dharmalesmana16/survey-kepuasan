@@ -17,7 +17,7 @@
         <input type="hidden" name="umur" value="0">
         <div class="row row-cols-1 row-cols-md-5 g-4">
             <?php
-            $data = [['nama' => 'Sangat Puas', 'icon' => '5', 'val' => 5], ['nama' => 'Puas', 'icon' => '5', 'val' => 4], ['nama' => 'Cukup Puas', 'icon' => '5', 'val' => 3], ['nama' => 'Kurang Puas', 'icon' => '5', 'val' => 2], ['nama' => 'Buruk', 'icon' => '5', 'val' => 1]];
+            $data = [['nama' => 'Sangat Puas', 'icon' => '5', 'val' => 5], ['nama' => 'Puas', 'icon' => '4', 'val' => 4], ['nama' => 'Cukup Puas', 'icon' => '3', 'val' => 3], ['nama' => 'Kurang Puas', 'icon' => '2', 'val' => 2], ['nama' => 'Buruk', 'icon' => '1', 'val' => 1]];
             ?>
 
             @foreach ($data as $datas)
@@ -25,28 +25,29 @@
 
                     <div class="col">
 
-                        <div class="card answerCard" style="border-radius: 40px;cursor: pointer;">
-                            <div class="card-body">
+                        <label for={{ $datas['nama'] }} class="submitJawaban" style="cursor: pointer;">
+                            <div class="card answerCard " style="border-radius: 40px;cursor: pointer;">
+                                <div class="card-body">
 
-                                <div class="text-center">
+                                    <div class="text-center">
+                                        <input type="radio" style="visibility: hidden;" name="jawaban"
+                                            id={{ $datas['nama'] }} value={{ $datas['val'] }} class="submitEmoji answers">
 
-                                    <input type="radio" style="visibility: hidden;" name="jawaban" id={{ $datas['nama'] }}
-                                        value={{ $datas['val'] }} class="submitEmoji answers">
 
 
-                                    <label for={{ $datas['nama'] }} class="submitJawaban" style="cursor: pointer;">
                                         {{-- <a href=""> --}}
-                                        <img src="/image/5.png" alt="" srcset="" width="100%">
-                                    </label>
-                                    <h4 class="text-muted fw-light">
-                                        {{ $datas['nama'] }}
-                                    </h4>
+                                        <img src="/image/{{ $datas['icon'] }}.png" alt="" srcset=""
+                                            width="100%">
+                                        <h4 class="text-muted fw-bold">
+                                            {{ $datas['nama'] }}
+                                        </h4>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                        </label>
                     </div>
                 </div>
-            @endforeach
+        </div>
+        @endforeach
 
 
         </div>
@@ -86,7 +87,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Submit',
+                confirmButtonText: 'Kirim',
                 closeOnConfirm: false,
 
                 closeOnCancel: false

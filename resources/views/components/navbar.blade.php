@@ -8,11 +8,10 @@
                         srcset="" width="200"></a>
             </div>
             <ul class="text-center col-lg-6 justify-content-lg-center list-unstyled text-white">
-
-                <li class="fw-bold fs-2">Pemerintah Provinsi Bali</li>
-                <li class="lead fs-5">Pustaka Nawaksara, Pemerintahan Kabupaten Gianyar</li>
-                <li class="lead fs-5">Telp : (0361)4711523, Email: info@dalsfindo.id</li>
-                <li class="lead fs-5">Website : dalsfindo.id</li>
+                <li class="fw-bold fs-2">Pemerintah Kabupaten Gianyar</li>
+                <li class="lead fs-4">Perpustakaan Daerah Nawaksara</li>
+                <li class="lead fs-6">Alamat : Jalan Ciung Wanara No.24, Telp : (0361) 4794808</li>
+                <li class="lead fs-6">Web : https://dispusarsip.gianyarkab.go.id , Email : kpadgianyar@gmail.com</li>
             </ul>
 
             <div class="bd-higlight">
