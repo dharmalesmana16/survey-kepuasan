@@ -18,7 +18,10 @@ axios.get('/api/responden?startDate=today')
     let totalJawaban = response.data;
 
     $('#ansToday').text(totalJawaban.data.length);
-   
+    // console.log(totalJawaban.data[0].jawaban)
+    // grafikBar.series[0].setData([
+    //     1,2,3,4,5
+    // ]);
 });
 axios.get('/api/responden?grouping=yes')
   .then((response) => {
@@ -88,13 +91,7 @@ $(".search").submit(function(e) {
           for(let i =0;i<groupingJawaban.length;i++){
             dataGrafik.push(groupingJawaban[i].totalGrouping)
           }
-          grafikBar.series[0].setData(
-            dataGrafik
-          );
-          grafikPie.series[0].update({
-            // name:["Sangat Puas","Puas","Cukup Puas","Kurang Puas","Buruk"],
-            data: dataGrafik
-        }, true);
+          
       }
   });
 });

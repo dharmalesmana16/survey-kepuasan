@@ -27,12 +27,12 @@ class Responden extends Controller
 
         // }
         if ($startDate == "today") {
-            $data = DB::table('tb_responden')->selectRaw("nama,jawaban")->whereRaw('date(created_at) = CURRENT_DATE()')->get();
+            $data = DB::table('tb_responden')->selectRaw("nama,jawaban")->whereRaw('date(created_at) = CURRENT_DATE()')->orderByDesc('jawaban')->get();
             return response()->json([
                 "data" => $data
             ]);
         } else if ($grouping == "yes") {
-            $data = DB::table('tb_responden')->selectRaw("count(jawaban) as totalGrouping")->whereRaw("date(created_at) = CURRENT_DATE()")
+            $data = DB::table('tb_responden')->selectRaw("jawaban,count(jawaban) as totalGrouping")->whereRaw("date(created_at) = CURRENT_DATE()")
                 ->groupBy("jawaban")->orderByDesc("jawaban")->get();
             return response()->json([
                 "data" => $data
