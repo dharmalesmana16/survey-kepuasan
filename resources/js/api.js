@@ -56,7 +56,7 @@ const tanggal_mulai = {
 
 };
 
-flatpickr('.tanggalAwal', tanggal_mulai);
+flatpickr('.tanggalAwal', tanggal_mulai); //tambahan
 const tanggal_akhir = {
 
   enableTime: true,
