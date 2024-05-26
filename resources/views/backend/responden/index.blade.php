@@ -44,31 +44,7 @@
             </form>
         </div>
     </div>
-    <div class="card-style">
-        <h6 class="mb-10" id="root">Pertanyaan</h6>
 
-        <p class="text-sm mb-20">
-        </p>
-
-        <div class="table-responsive">
-            <table class="table table-hover devices">
-                <thead>
-                    <tr class="" style="">
-                        <th scope="" style="">No</th>
-                        <th scope="" style="">Responden</th>
-                        {{-- <th scope="" style="">Alamat IP</th> --}}
-                        <th scope="" style="">Jawaban</th>
-                        <th scope="" style="">Jam</th>
-                    </tr>
-                </thead>
-
-
-            </table>
-
-
-        </div>
-
-    </div>
     <section class="">
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4">
@@ -108,50 +84,4 @@
             </div>
         </div>
     </section>
-    <script>
-        $(document).ready(function() {
-            let dataDevice = $('.devices').DataTable({
-                "searching": false,
-                "responsive": true,
-                "paging": true,
-                "info": false,
-                "autoWidth": false,
-                "aLengthMenu": [5],
-                "lengthChange": false,
-                "ordering": false,
-                "ajax": '/api/responden?startDate=all',
-                "columns": [{
-                        "data": "id",
-                        render: function(data, type, row, meta) {
-                            return meta.row + meta.settings._iDisplayStart + 1;
-
-                        }
-                    },
-                    {
-                        "data": "komentar"
-                    },
-
-
-                    {
-                        "data": "jawaban",
-                        // render: function(data, type, row, meta) {
-                        //     return `<div class="d-flex"> <div class="action"> <button class="btn btn-md text-primary"> <a href="/devices/update/${data}"><i class="fa fa-wrench"></i>  </a> </button>  </div>`
-                        // return  data
-
-                        // }
-
-                    },
-                    {
-                        "data": "created_at",
-                        // render: function(data, type, row, meta) {
-                        //     return `<div class="d-flex"> <div class="action"> <button class="btn btn-md text-primary"> <a href="/devices/update/${data}"><i class="fa fa-wrench"></i>  </a> </button>  </div>`
-                        // return  data
-
-                        // }
-
-                    }
-                ]
-            });
-        })
-    </script>
 @endsection

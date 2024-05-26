@@ -114,7 +114,7 @@ class Responden extends Controller
             $jawabanE = 1;
         }
         // function indonesiaFormat($waktu){
-        $date = date('N-d-n-Y-H:i:s');
+        $date = date('w-d-n-Y-H:i:s');
 
         $hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
         $bulan = array(
@@ -137,7 +137,7 @@ class Responden extends Controller
         // }
 
 
-        $connector = new FilePrintConnector("POS-80C");
+        $connector = new WindowsPrintConnector("POS-80C"); // on mac File
         // $logo = EscposImage::load("/logonew.png",false);
         $printer = new Printer($connector);
 

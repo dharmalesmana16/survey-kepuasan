@@ -54,7 +54,7 @@
         $(document).ready(function() {
             setTimeout(() => {
                 window.location.href = '/kioskvideo'
-            }, 5000);
+            }, 30000);
         });
         $('.submitJawaban').change(function(e) {
             e.preventDefault();
