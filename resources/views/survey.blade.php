@@ -26,18 +26,14 @@
                     <div class="col">
 
                         <label for={{ $datas['nama'] }} class="submitJawaban" style="cursor: pointer;">
-                            <div class="card answerCard " style="border-radius: 40px;cursor: pointer;">
+                            <div class="card answerCard w-100" style="border-radius: 40px;cursor: pointer;">
                                 <div class="card-body">
 
                                     <div class="text-center">
                                         <input type="radio" style="visibility: hidden;" name="jawaban"
                                             id={{ $datas['nama'] }} value={{ $datas['val'] }} class="submitEmoji answers">
-
-
-
-                                        {{-- <a href=""> --}}
                                         <img src="/image/{{ $datas['icon'] }}.png" alt="" srcset=""
-                                            width="100%">
+                                            width="100%" class="img-fluid">
                                         <h4 class="text-muted fw-bold">
                                             {{ $datas['nama'] }}
                                         </h4>
@@ -51,20 +47,18 @@
 
 
         </div>
-        {{-- <div class="text-center">
-            <button type="submit" class="btn btn-primary btncreate">Tambah Data</button>
-        </div> --}}
+
     </form>
 
     <script>
-        function test() {
-            console.log("Print")
-        }
-        $('.submitEmoji').change(function(e) {
+        $(document).ready(function() {
+            setTimeout(() => {
+                window.location.href = '/kioskvideo'
+            }, 5000);
+        });
+        $('.submitJawaban').change(function(e) {
             e.preventDefault();
-            // $(".answers").prop('checked', true);
 
-            // $('.ansCard').attr(attributeName);
             let strAnswer = "";
             // let ele = $('input[name="answer"]:checked');
             let val = $('input[name="jawaban"]:checked').val();
@@ -72,7 +66,6 @@
                 strAnswer = "Sangat Puas"
             } else if (val == 4) {
                 strAnswer = "Puas"
-
             } else if (val == 3) {
                 strAnswer = "Cukup Puas"
             } else if (val == 2) {
@@ -89,11 +82,9 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Kirim',
                 closeOnConfirm: false,
-
                 closeOnCancel: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    test();
                     $.ajax({
                         type: 'POST',
                         url: '/api/responden',
@@ -103,8 +94,7 @@
                         data: $('.submitAnswer').serialize(),
                         beforeSend: function() {
                             Swal.fire({
-                                title: 'Please Wait !',
-                                // html: '',// add html attribute if you want or remove
+                                title: 'Mohon Tunggu Sebentar !',
                                 allowOutsideClick: false,
                                 showCancelButton: false,
                                 showConfirmButton: false,
@@ -125,6 +115,9 @@
                             }, 1000);
                         }
                     });
+
+                } else {
+                    $('input[name="jawaban"]').prop("checked", false)
 
                 }
             })

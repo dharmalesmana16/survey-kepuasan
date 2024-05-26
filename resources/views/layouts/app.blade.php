@@ -19,12 +19,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/plugins/monthSelect/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="/js/highchart/code/highcharts.js"></script>
-    <script src="/js/highchart/code/highcharts-more.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+    {{-- <script src="/js/highchart/code/highcharts.js"></script>
+    <script src="/js/highchart/code/highcharts-more.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.min.js"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{-- <script type="text/javascript" src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.min.js"></script> --}}
     {{-- <script type="text/javascript" src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script> --}}
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
@@ -137,7 +137,7 @@
                                     <div class="profile-info">
                                         <div class="info">
 
-                                            <h6 class="text-white">{{ session('nama') }}</h6>
+                                            <h6 class="text-black">{{ session('nama') }}</h6>
                                             <div class="image">
                                                 <img src="/images/profile/profile-image.png" alt="" />
                                                 <span class="status"></span>

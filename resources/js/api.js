@@ -19,7 +19,7 @@ axios.get('/api/responden?startDate=today')
     let textTampilanAnswer ="";
     let totalAnswer = totalJawaban.data.length
     $('#ansToday').text(totalAnswer);
-    console.log(totalJawaban.data);
+    // console.log(totalJawaban.data);
     for(let i =0;i<totalJawaban.data.length;i++){
       sumAnswer = sumAnswer + totalJawaban.data[i].jawaban
     }
@@ -33,8 +33,11 @@ axios.get('/api/responden?startDate=today')
       textTampilanAnswer = "Cukup Puas"
     }else if(result == 2){
       textTampilanAnswer = "Kurang Puas"
-    }else{
+    }else if (result == 1){
       textTampilanAnswer = "Buruk"
+    }else{
+      textTampilanAnswer = "Belum ada responden"
+      result ='6'
     }
     $("#tampilanAnswer").attr("src",`/image/${result}.png`);
     $('#textTampilanAnswer').text(textTampilanAnswer);
@@ -45,9 +48,7 @@ axios.get('/api/responden?grouping=yes')
   .then((response) => {
     let groupingJawaban = response.data;
     let dataGrouping=[];
-    let dataPieGrafic =[];
-    let jawaban;
-    
+    let dataPieGrafic =[];    
     for(let i =0;i<groupingJawaban.data.length;i++){
       let dataObj ={};
       let nameAnswer =groupingJawaban.data[i].jawaban
@@ -66,11 +67,13 @@ axios.get('/api/responden?grouping=yes')
 
       dataObj["y"]=groupingJawaban.data[i].totalGrouping;
       dataPieGrafic.push(dataObj);
+      dataGrouping.push(dataPieGrafic[i].name)
     } 
-    
-    grafikBar.series[0].setData(
-      dataPieGrafic
-    );
+    grafikBar.xAxis[0].setCategories(dataGrouping)
+    // console.log(dataPieGrafic)
+    grafikBar.series[0].update({
+      data:dataPieGrafic
+  },true);
     grafikPie.series[0].update({
       // name:["Sangat Puas","Puas","Cukup Puas","Kurang Puas","Buruk"],
       data: dataPieGrafic
@@ -114,16 +117,85 @@ $(".search").submit(function(e) {
       },
       data: serializedData,
       // dataType: "dataType",
+      beforeSend: function() {
+        $('#buttonsearch').attr('disable', 'disabled');
+        $('#buttonsearch').html('<i class="fa fa-spin fa-spinner"> </i>');
+    },
+      complete: function() {
+        $('#buttonsearch').removeAttr('disable');
+        $('#buttonsearch').text('Search');
+    },
+  
       success: function(response) {
-        console.log(response);
-        let totalJawaban = response.data;
-      $('#ansToday').text(totalJawaban.length);
-          let groupingJawaban = response.grouping;
-          let dataGrafik = []
-          // console.log(groupingJawaban[0].totalGrouping)
-          for(let i =0;i<groupingJawaban.length;i++){
-            dataGrafik.push(groupingJawaban[i].totalGrouping)
-          }
+        console.log(response.data.length);
+        let totalAnswer = response.data.length
+
+        $('#ansToday').text(totalAnswer);
+        let sumAnswer =0;
+        let textTampilanAnswer ="";
+   
+    // console.log(totalJawaban.data);
+    for(let i =0;i<totalAnswer;i++){
+      sumAnswer = sumAnswer + response.data[i].jawaban
+    }
+    
+    let result = Math.round(sumAnswer/totalAnswer)
+    if(result == 5){
+      textTampilanAnswer = "Sangat Puas"
+    }else if (result== 4){
+      textTampilanAnswer = "Puas"
+    }else if (result == 3){
+      textTampilanAnswer = "Cukup Puas"
+    }else if(result == 2){
+      textTampilanAnswer = "Kurang Puas"
+    }else if (result == 1){
+      textTampilanAnswer = "Buruk"
+    }else{
+      textTampilanAnswer = "Belum ada responden"
+      result ='6'
+    }
+    $("#tampilanAnswer").attr("src",`/image/${result}.png`);
+    $('#textTampilanAnswer').text(textTampilanAnswer);
+
+    let groupingJawaban = response.grouping;
+    let dataGrouping=[];
+    let dataPieGrafic =[];    
+    for(let i =0;i<groupingJawaban.length;i++){
+      let dataObj ={};
+      let nameAnswer =groupingJawaban[i].jawaban
+      if(nameAnswer == 5){
+        nameAnswer = "Sangat Puas"
+      }else if (nameAnswer== 4){
+        nameAnswer = "Puas"
+      }else if (nameAnswer == 3){
+        nameAnswer = "Cukup Puas"
+      }else if(nameAnswer == 2){
+        nameAnswer = "Kurang Puas"
+      }else{
+        nameAnswer = "Buruk"
+      }
+      dataObj["name"]=nameAnswer;
+
+      dataObj["y"]=groupingJawaban[i].totalGrouping;
+      dataPieGrafic.push(dataObj);
+      dataGrouping.push(dataPieGrafic[i].name)
+    } 
+    grafikBar.xAxis[0].setCategories(dataGrouping)
+    // console.log(dataPieGrafic)
+    grafikBar.series[0].update({
+      data:dataPieGrafic
+  },true);
+    grafikPie.series[0].update({
+      // name:["Sangat Puas","Puas","Cukup Puas","Kurang Puas","Buruk"],
+      data: dataPieGrafic
+  }, true);
+
+        //   let groupingJawaban = response.grouping;
+        //   let dataGrafik = []
+        //   // console.log(groupingJawaban[0].totalGrouping)
+        //   for(let i =0;i<groupingJawaban.length;i++){
+        //     dataGrafik.push(groupingJawaban[i].totalGrouping)
+        //   }
           
       }
   });

@@ -27,34 +27,23 @@ class Responden extends Controller
         $grouping = $request->input("grouping");
         $tanggalAwal = $request->input('tanggalAwal');
         $tanggalAkhir = $request->input("tanggalAkhir");
-        // $endDate = $request->input("endDate");
-        // if ($startDate != null && $endDate != null){
-
-        // }
         if ($startDate == "today") {
             $data = DB::table('tb_responden')->selectRaw("komentar,jawaban")->whereRaw('date(created_at) = CURRENT_DATE()')->orderByDesc('jawaban')->get();
             return response()->json([
                 "data" => $data
             ]);
         } else if ($grouping == "yes") {
-            $data = [
-                "5" => 0,
-                "4" => 0,
-                "3" => 0,
-                "2" => 0,
-                "1" => 0,
-            ];
+
             $data = DB::table('tb_responden')->selectRaw("jawaban,count(jawaban) as totalGrouping")->whereRaw("date(created_at) = CURRENT_DATE()")
                 ->groupBy("jawaban")->orderByDesc("jawaban")->get();
-
             return response()->json([
                 "data" =>  $data
             ]);
             // return $data;
         } else if ($tanggalAwal != null && $tanggalAkhir != null && $grouping == "true") {
-            $data = DB::table("tb_responden")->selectRaw("jawaban")->whereRaw("created_at between
+            $data = DB::table("tb_responden")->selectRaw("komentar,jawaban")->whereRaw("created_at between
             '$tanggalAwal' and '$tanggalAkhir'")->get();
-            $grouping = DB::table('tb_responden')->selectRaw("count(jawaban) as totalGrouping")->whereRaw("created_at between
+            $grouping = DB::table('tb_responden')->selectRaw("jawaban,count(jawaban) as totalGrouping")->whereRaw("created_at between
             '$tanggalAwal' and '$tanggalAkhir'")
                 ->groupBy("jawaban")->orderByDesc("jawaban")->get();
             return response()->json([
@@ -62,17 +51,18 @@ class Responden extends Controller
                 "grouping" => $grouping
             ]);
         }
-
-        // $data = $this->data::all();
-        // if ($data) {
-        //     return response()->json([
-        //         "data" => $data
-        //     ]);
-        // } else {
-        //     return response()->json([
-        //         "msg" => "no data"
-        //     ]);
-        // }
+        if ($startDate == "all") {
+            $data = $this->data::all();
+            if ($data) {
+                return response()->json([
+                    "data" => $data
+                ]);
+            } else {
+                return response()->json([
+                    "msg" => "no data"
+                ]);
+            }
+        }
     }
     public function show($id = null)
     {
@@ -147,7 +137,7 @@ class Responden extends Controller
         // }
 
 
-        $connector = new WindowsPrintConnector("POS-80C");
+        $connector = new FilePrintConnector("POS-80C");
         // $logo = EscposImage::load("/logonew.png",false);
         $printer = new Printer($connector);
 

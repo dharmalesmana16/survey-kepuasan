@@ -38,8 +38,8 @@
                         <input type="text" name="tanggalAkhir" class="tanggalAkhir form-control" id="tanggalAkhir"
                             required />
                     </div>
-                    <button type="submit" id="buttonsearch" class="btn btn-md btn-primary rounded"><i
-                            class="fa-solid fa-magnifying-glass"></i> Search</button>
+                    <button type="submit" class="btn btn-md btn-primary rounded"><i
+                            class="fa-solid fa-magnifying-glass"></i> <span id="buttonsearch">Search<span></button>
                 </div>
             </form>
         </div>
@@ -108,5 +108,50 @@
             </div>
         </div>
     </section>
-    <script></script>
+    <script>
+        $(document).ready(function() {
+            let dataDevice = $('.devices').DataTable({
+                "searching": false,
+                "responsive": true,
+                "paging": true,
+                "info": false,
+                "autoWidth": false,
+                "aLengthMenu": [5],
+                "lengthChange": false,
+                "ordering": false,
+                "ajax": '/api/responden?startDate=all',
+                "columns": [{
+                        "data": "id",
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+
+                        }
+                    },
+                    {
+                        "data": "komentar"
+                    },
+
+
+                    {
+                        "data": "jawaban",
+                        // render: function(data, type, row, meta) {
+                        //     return `<div class="d-flex"> <div class="action"> <button class="btn btn-md text-primary"> <a href="/devices/update/${data}"><i class="fa fa-wrench"></i>  </a> </button>  </div>`
+                        // return  data
+
+                        // }
+
+                    },
+                    {
+                        "data": "created_at",
+                        // render: function(data, type, row, meta) {
+                        //     return `<div class="d-flex"> <div class="action"> <button class="btn btn-md text-primary"> <a href="/devices/update/${data}"><i class="fa fa-wrench"></i>  </a> </button>  </div>`
+                        // return  data
+
+                        // }
+
+                    }
+                ]
+            });
+        })
+    </script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\usersModel;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -10,7 +11,7 @@ class UserController extends Controller
     protected $data;
     public function __construct()
     {
-        $this->data = new User();
+        $this->data = new usersModel();
     }
     public function index()
     {
