@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\usersModel;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ class Users extends Controller
     protected $data;
     public function __construct()
     {
-        $this->data = new User();
+        $this->data = new usersModel();
     }
     public function index()
     {
@@ -49,8 +50,8 @@ class Users extends Controller
             'first_name' => $first_name,
             'last_name' => $last_name,
             'username' => $username,
-            'email' => 'info@dalsfindo.id',
-            'password' => Hash::make($password),
+            'email' => 'info@nuansaintipersada.co.id',
+            'password' => bcrypt($password),
         ];
         $resp = $this->data->create($data);
         if ($resp) {

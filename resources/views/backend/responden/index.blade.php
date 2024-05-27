@@ -38,37 +38,13 @@
                         <input type="text" name="tanggalAkhir" class="tanggalAkhir form-control" id="tanggalAkhir"
                             required />
                     </div>
-                    <button type="submit" id="buttonsearch" class="btn btn-md btn-primary rounded"><i
-                            class="fa-solid fa-magnifying-glass"></i> Search</button>
+                    <button type="submit" class="btn btn-md btn-primary rounded"><i
+                            class="fa-solid fa-magnifying-glass"></i> <span id="buttonsearch">Search<span></button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="card-style">
-        <h6 class="mb-10" id="root">Pertanyaan</h6>
 
-        <p class="text-sm mb-20">
-        </p>
-
-        <div class="table-responsive">
-            <table class="table table-hover devices">
-                <thead>
-                    <tr class="" style="">
-                        <th scope="" style="">No</th>
-                        <th scope="" style="">Responden</th>
-                        {{-- <th scope="" style="">Alamat IP</th> --}}
-                        <th scope="" style="">Jawaban</th>
-                        <th scope="" style="">Jam</th>
-                    </tr>
-                </thead>
-
-
-            </table>
-
-
-        </div>
-
-    </div>
     <section class="">
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4">
@@ -108,5 +84,4 @@
             </div>
         </div>
     </section>
-    <script></script>
 @endsection

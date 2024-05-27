@@ -13,7 +13,6 @@
                 <a href="/survey/{{ $res['slug'] }}">
                     <div class="card myCard" style="border-radius: 40px">
                         <div class="text-center">
-
                             <img src="/storage/{{ $res['icon'] }}" width="250" class="">
                         </div>
                         <div class="card-body">

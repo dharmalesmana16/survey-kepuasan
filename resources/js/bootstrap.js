@@ -7,6 +7,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import $ from 'jquery';
+// import Highcharts from 'highcharts';
 // window.dataTable =jqueryDataTables
 window.Swal = Swal;
 // window.FormData = new FormData;

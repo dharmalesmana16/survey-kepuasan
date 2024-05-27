@@ -13,7 +13,6 @@ use App\Http\Controllers\respondenController;
 use App\Http\Controllers\UserController;
 use App\Models\groupModel;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,13 +35,18 @@ Route::get('/', function () {
     return view('group', $data);
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
-
+})->middleware('authku')->name('dashboard');
+Route::get('/kioskvideo', function () {
+    return view('video');
+});
+Route::post('/ceklogin', [AuthController::class, "authenticate"]);
 // Route::post('', 'authenticate')->name('signin');
 Route::get('/signout', [AuthController::class, 'logout']);
-Route::post('/signin', [AuthController::class, 'authenticate'])->middleware('RedirectIfAuth')->name('signin');
+Route::get('/signin', [AuthController::class, 'index']);
+// Route::post('/auth', [AuthController::class, 'authenticate']);
 Route::controller(groupController::class)->prefix('dashboard/layanan')->group(function () {
     Route::get('', 'index')->name('layanan');
     Route::get('show/{slug}', 'show');
@@ -80,10 +84,6 @@ Route::resource('api/layanan', Layanan::class);
 Route::resource('api/question', Question::class);
 Route::resource('api/responden', Responden::class);
 Route::resource('api/users', Users::class);
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-require __DIR__ . '/auth.php';
+// 
+// require __DIR__ . '/auth.php';

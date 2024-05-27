@@ -11,8 +11,8 @@ let grafikBar = Highcharts.chart('barChart', {
     title: {
         text: 'Grafik Jawaban per hari ini'
     },
-    xAxis: {
-        categories: ['Sangat Puas', 'Puas', 'Cukup Puas',"Kurang Puas","Buruk"]
+    xAxis:{
+        categories:[]
     },
     yAxis: {
         title: {
@@ -20,7 +20,6 @@ let grafikBar = Highcharts.chart('barChart', {
         }
     },
     series: [{
-        // name: 'Jane',
         data: []
     },]
 });
@@ -110,7 +109,7 @@ let grafikPie = Highcharts.chart('pieChart', {
         align: 'left'
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+        pointFormat: 'Nilai : <b>{point.percentage:.2f}%</b>'
     },
     accessibility: {
         point: {

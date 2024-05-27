@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\LogsModel;
-use App\Models\User;
-use App\Models\UsersModel;
+use App\Models\usersModel;
+// use App\Models\User;
+// use App\Models\usersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -13,30 +14,32 @@ class AuthController extends Controller
     public function index()
     {
 
-        return view('template.signin');
+        return view('signin');
     }
     public function authenticate(Request $request)
     {
         $username = $request->input('username');
         $password = $request->input('password');
-        $checkAuth = User::where('username', $username)->first();
-
+        $checking = new usersModel();
+        $checkAuth = $checking::where('username', $username)->first();
+        // $checking = use
+        // echo
         if ($checkAuth) {
+
             $passVerify = $checkAuth->password;
             if (password_verify($password, $passVerify)) {
-                if ($checkAuth->status == "PENDING") {
-                    Session::flash('pending', "Your account is not active, please contact your admin !");
-                    return redirect('/signin');
-                } else {
 
-                    session([
-                        'nama' => $checkAuth->first_name . " " . $checkAuth->last_name,
-                        'isLogin' => true,
-                        // 'role' => $checkAuth->role,
-                    ]);
-
-                    return redirect(url('/'));
-                }
+                // echo "sukses";
+                session([
+                    'nama' => $checkAuth->username,
+                    'isLogin' => true,
+                    // 'role' => $checkAuth->role,
+                ]);
+                return response()->json([
+                    "msg" => "Success",
+                    "status" => 1
+                ], 200);
+                // return redirect('/dashboard');
             } else {
                 Session::flash('error', "Password Anda Salah !");
                 return back()->WithInput();

@@ -17,7 +17,7 @@ class RedirectIfAuth
     public function handle(Request $request, Closure $next)
     {
         if ($request->session()->get('isLogin') == true) {
-            return redirect('/');
+            return redirect('/dashboard');
         }
         return $next($request);
     }
