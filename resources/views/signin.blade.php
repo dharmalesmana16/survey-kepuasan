@@ -91,12 +91,12 @@
                 $('.btnLogin').html('Submit');
             },
             success: function(response) {
-                console.log(response)
+                // console.log(response)
                 if (response.status == 1) {
                     setTimeout(() => {
 
-                        window.location.href = '/backoffice'
-                    }, 5000);
+                        window.location.href = '/dashboard'
+                    }, 1000);
                 }
             }
         });

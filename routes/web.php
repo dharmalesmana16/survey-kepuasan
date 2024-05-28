@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Layanan;
 use App\Http\Controllers\Api\Question;
 use App\Http\Controllers\Api\Responden;
 use App\Http\Controllers\Api\Users;
+use App\Http\Controllers\Api\Video;
 use App\Http\Controllers\groupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\questionController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\QuestionModelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\respondenController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\videoController;
 use App\Models\groupModel;
 use Illuminate\Support\Facades\Route;
 /*
@@ -79,11 +81,20 @@ Route::controller(UserController::class)->prefix('dashboard/user')->group(functi
     Route::get('update/{slug}', 'edit');
     Route::put('update/{slug}', 'update');
 });
+Route::controller(videoController::class)->prefix('dashboard/video')->group(function () {
+    Route::get('', 'index');
+    Route::get('show/{slug}', 'show');
+    Route::get('new', 'new');
+    Route::post('new', 'new');
+    Route::get('update/{slug}', 'edit');
+    Route::put('update/{slug}', 'update');
+});
 
 Route::resource('api/layanan', Layanan::class);
 Route::resource('api/question', Question::class);
 Route::resource('api/responden', Responden::class);
 Route::resource('api/users', Users::class);
+Route::resource('api/video', Video::class);
 
 // 
 // require __DIR__ . '/auth.php';
