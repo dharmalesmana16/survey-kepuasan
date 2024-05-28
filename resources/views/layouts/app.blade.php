@@ -98,6 +98,16 @@
                     </a>
                 </li>
             </ul>
+            <ul class="navMenus">
+                <li class="nav-item ">
+                    <a href="{{ url('/dashboard/video') }}" class="active text-main">
+                        <span class="icon">
+                            <i class="fa-sharp fa-solid fa-gauge"></i>
+                        </span>
+                        Manajemen Video
+                    </a>
+                </li>
+            </ul>
         </nav>
 
     </aside>

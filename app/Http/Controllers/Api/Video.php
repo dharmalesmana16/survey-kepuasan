@@ -4,17 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\groupModel;
+use App\Models\videoModel;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class Layanan extends Controller
+class Video extends Controller
 {
     protected $data;
     public function __construct()
     {
-        $this->data = new groupModel();
+        $this->data = new videoModel();
     }
     public function index()
     {
@@ -38,18 +39,17 @@ class Layanan extends Controller
             ]);
         }
     }
-
     public function store(Request $request)
     {
-        $nama_layanan = $request->input("nama_layanan");
+        $judul_video = $request->input("judul_video");
 
-        $iconName = time() . "-" . $nama_layanan . "." . $request->file('icon')->getClientOriginalExtension();
-        Storage::disk('public')->put($iconName, file_get_contents($request->icon));
+        $videoName = time() . "-" . $judul_video . "." . $request->file('file_video')->getClientOriginalExtension();
+        Storage::disk('public')->put($videoName, file_get_contents($request->file_video));
 
         $data = [
-            'nama_pelayanan' => $nama_layanan,
-            'icon' => $iconName,
-            'slug' => Str::slug($nama_layanan),
+            'judul_video' => $judul_video,
+            'file_video' => $videoName,
+            // 'slug' => Str::slug($judul_video),
         ];
         $resp = $this->data->create($data);
         if ($resp) {
@@ -63,8 +63,8 @@ class Layanan extends Controller
     {
         $data = $this->data::find($id);
         $data->id = $request->id;
-        $data->nama_layanan = $request->nama_layanan;
-        $data->icon = $request->icon;
+        $data->judul_video = $request->judul_video;
+        // $data->icon = $request->icon;
         $req = $data->save();
         if ($req) {
             return response()->json([
