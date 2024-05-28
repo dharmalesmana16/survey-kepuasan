@@ -68,7 +68,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="navMenus">
+            {{-- <ul class="navMenus">
                 <li class="nav-item ">
                     <a href="{{ url('/dashboard/question') }}" class="active text-main">
                         <span class="icon">
@@ -77,7 +77,7 @@
                         Pertanyaan
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
             <ul class="navMenus">
                 <li class="nav-item ">
                     <a href="{{ url('/dashboard/layanan') }}" class="active text-main">
@@ -105,6 +105,16 @@
                             <i class="fa-sharp fa-solid fa-gauge"></i>
                         </span>
                         Manajemen Video
+                    </a>
+                </li>
+            </ul>
+            <ul class="navMenus">
+                <li class="nav-item ">
+                    <a href="{{ url('/survey/Pelayanan') }}" class="active text-main">
+                        <span class="icon">
+                            <i class="fa-sharp fa-solid fa-gauge"></i>
+                        </span>
+                        Kembali ke survey
                     </a>
                 </li>
             </ul>

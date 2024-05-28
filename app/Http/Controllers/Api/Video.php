@@ -9,6 +9,7 @@ use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 
 class Video extends Controller
 {
@@ -45,7 +46,6 @@ class Video extends Controller
 
         $videoName = time() . "-" . $judul_video . "." . $request->file('file_video')->getClientOriginalExtension();
         Storage::disk('public')->put($videoName, file_get_contents($request->file_video));
-
         $data = [
             'judul_video' => $judul_video,
             'file_video' => $videoName,
@@ -53,7 +53,6 @@ class Video extends Controller
         ];
         $resp = $this->data->create($data);
         if ($resp) {
-
             return response()->json([
                 "msg" => "success"
             ], 201);
@@ -62,14 +61,31 @@ class Video extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->data::find($id);
+
+        if ($request->file_video) {
+            $exists = Storage::disk('public')->exists("$data->file_video");
+            if ($exists) {
+                Storage::disk('public')->delete("$data->file_video");
+            }
+
+            // file_video name
+            $videoName = time() . "-" . $data->judul_video  . "." . $request->file_video->getClientOriginalExtension();
+            $data->file_video = $videoName;
+            // $imageSlug = $request->file_video->getClientOriginalName();
+
+            // file_video save in public folder
+            Storage::disk('public')->put($videoName, file_get_contents($request->file_video));
+        }
         $data->id = $request->id;
         $data->judul_video = $request->judul_video;
         // $data->icon = $request->icon;
         $req = $data->save();
         if ($req) {
-            return response()->json([
-                "msg" => "Update Successfully !",
-            ], 200);
+            // Session::flash('error', "Password Anda Salah !");
+            // return redirect('/dashboard/video');
+            return response()->json(
+                ["msg" => "sukses"]
+            );
         }
     }
 }

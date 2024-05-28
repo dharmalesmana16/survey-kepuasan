@@ -52,14 +52,34 @@
             background: #ddd;
             color: black;
         }
+
+        .video-container {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+
+            video {
+                object-fit: cover;
+                width: 100vw;
+                height: 100vh;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
     </style>
 </head>
 
 <body class="touchAnswer">
 
-    <video autoplay muted loop id="myVideo">
-        <source src="/video/Iklan.mp4" type="video/mp4">
-    </video>
+    <div class="video-container">
+        <video autoplay muted loop poster="" id="bgvid">
+            <source src="/storage/{{ $data['file_video'] }}" type="video/mp4">
+        </video>
+
+    </div>
+
 
     <div class="jumbotron content p-5 " style="visibility: hidden">
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -89,7 +109,7 @@
         var video = document.getElementById("myVideo");
         var btn = document.getElementById("myBtn");
 
-        $("#myVideo").click(function(e) {
+        $(".touchAnswer").click(function(e) {
             e.preventDefault();
             $(".content").css('visibility', 'visible');
             console.log("ada")

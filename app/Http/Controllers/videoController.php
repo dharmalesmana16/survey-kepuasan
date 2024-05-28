@@ -20,7 +20,7 @@ class videoController extends Controller
     public function index()
     {
         $data = [
-            "data" => $this->data::all()
+            "data" => $this->data::find(1)->first()
         ];
         return view('backend/video/index', $data);
     }
@@ -54,13 +54,13 @@ class videoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(groupModel $groupModel)
+    public function edit($id)
     {
         $data = [
-            "title" => "Update Layanan"
-
+            "title" => "Update data",
+            "data" => $this->data::find($id)->first(),
         ];
-        return view("backend/layanan/update", $data);
+        return view("backend/video/update", $data);
     }
 
     /**

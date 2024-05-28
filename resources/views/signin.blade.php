@@ -93,10 +93,21 @@
             success: function(response) {
                 // console.log(response)
                 if (response.status == 1) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: response["msg"],
+                        showConfirmButton: false
+                    });
                     setTimeout(() => {
 
                         window.location.href = '/dashboard'
                     }, 1000);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Password atau username anda salah !",
+                        showConfirmButton: false
+                    });
                 }
             }
         });

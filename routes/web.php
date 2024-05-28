@@ -14,6 +14,7 @@ use App\Http\Controllers\respondenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\videoController;
 use App\Models\groupModel;
+use App\Models\videoModel;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('authku')->name('dashboard');
 Route::get('/kioskvideo', function () {
-    return view('video');
+    $dataVideo = new videoModel();
+    $data = [
+        "data" => $dataVideo::find(1)->first()
+    ];
+    return view('video', $data);
 });
 Route::post('/ceklogin', [AuthController::class, "authenticate"]);
 // Route::post('', 'authenticate')->name('signin');
