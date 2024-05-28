@@ -68,8 +68,11 @@ class Users extends Controller
         $data->first_name = $request->first_name;
         $data->last_name = $request->last_name;
         $data->username = $request->username;
-        $data->password = Hash::make($request->password);
-        $data->last_name = $request->last_name;
+        // $data->password = bcrypt($request->password);
+        if ($request->password) {
+            $data->password = bcrypt($request->password);
+        }
+        $data->email = $request->email;
         $req = $data->save();
         if ($req) {
             return response()->json([

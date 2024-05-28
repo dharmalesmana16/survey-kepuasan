@@ -16,7 +16,8 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            "title" => "Manajemen User"
+            "title" => "Manajemen User",
+            "data" => $this->data::all()
         ];
         return view('backend.user.index', $data);
     }
@@ -32,6 +33,6 @@ class UserController extends Controller
         $data = [
             "data" => $this->data::find($id)
         ];
-        return view('backend.user.edit');
+        return view('backend.user.edit', $data);
     }
 }
