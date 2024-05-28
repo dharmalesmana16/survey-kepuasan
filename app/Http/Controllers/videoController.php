@@ -19,8 +19,14 @@ class videoController extends Controller
     }
     public function index()
     {
+        $req = $this->data::find(1)->first();
+        if ($req == null) {
+            $req = [
+                "judul_video" => "null"
+            ];
+        }
         $data = [
-            "data" => $this->data::find(1)->first()
+            "data" => $req
         ];
         return view('backend/video/index', $data);
     }
