@@ -54,11 +54,14 @@
         }
     </style>
 </head>
-
 <body class="touchAnswer">
+    @php
+    // echo $data->judul_video
+
+    @endphp
 
     <video autoplay muted loop id="myVideo">
-        <source src="/video/Iklan.mp4" type="video/mp4">
+        <source src="/storage/{{ $data->file_video }}" type="video/mp4">
     </video>
 
     <div class="jumbotron content p-5 " style="visibility: hidden">
@@ -77,7 +80,7 @@
             <div class="col">
 
                 {{-- <p class="lead"> --}}
-                <a href="/survey/Pelayanan" class="btn btn-danger btn-lg">
+                <a href="/" class="btn btn-danger btn-lg">
                     Kembali ke Survey</a>
                 {{-- </p> --}}
             </div>
@@ -86,6 +89,9 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded",function(){
+
+
         var video = document.getElementById("myVideo");
         var btn = document.getElementById("myBtn");
 
@@ -111,6 +117,7 @@
                 btn.innerHTML = "Play";
             }
         }
+    },false)
     </script>
 
 </body>

@@ -3,6 +3,10 @@ import Alpine from 'alpinejs';
 import 'bootstrap';
 import Highcharts from 'highcharts';
 import flatpickr from 'flatpickr';
+import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect';
+
+window.flatpickr = flatpickr;
+window.monthSelectPlugin = monthSelectPlugin
 // var Highcharts = require('highcharts/highstock');
 let grafikBar = Highcharts.chart('barChart', {
     chart: {
@@ -11,8 +15,8 @@ let grafikBar = Highcharts.chart('barChart', {
     title: {
         text: 'Grafik Jawaban per hari ini'
     },
-    xAxis:{
-        categories:[]
+    xAxis: {
+        categories: []
     },
     yAxis: {
         title: {
@@ -21,7 +25,7 @@ let grafikBar = Highcharts.chart('barChart', {
     },
     series: [{
         data: []
-    },]
+    }, ]
 });
 (function (H) {
     H.seriesTypes.pie.prototype.animate = function (init) {
@@ -63,25 +67,25 @@ let grafikBar = Highcharts.chart('barChart', {
                         // apply the inner size
                         if (point.index === series.points.length - 1) {
                             series.dataLabelsGroup.animate({
-                                opacity: 1
-                            },
-                            void 0,
-                            function () {
-                                points.forEach(point => {
-                                    point.opacity = 1;
-                                });
-                                series.update({
-                                    enableMouseTracking: true
-                                }, false);
-                                chart.update({
-                                    plotOptions: {
-                                        pie: {
-                                            innerSize: '40%',
-                                            borderRadius: 8
+                                    opacity: 1
+                                },
+                                void 0,
+                                function () {
+                                    points.forEach(point => {
+                                        point.opacity = 1;
+                                    });
+                                    series.update({
+                                        enableMouseTracking: true
+                                    }, false);
+                                    chart.update({
+                                        plotOptions: {
+                                            pie: {
+                                                innerSize: '40%',
+                                                borderRadius: 8
+                                            }
                                         }
-                                    }
+                                    });
                                 });
-                            });
                         }
                     });
             }
@@ -102,7 +106,7 @@ let grafikPie = Highcharts.chart('pieChart', {
     chart: {
         type: 'pie'
     },
-    credits:false,
+    credits: false,
     // categories:["Sangat Puas"],
     title: {
         text: 'Jawaban berdasarkan persentase',
@@ -137,7 +141,7 @@ let grafikPie = Highcharts.chart('pieChart', {
         colorByPoint: true,
         data: [{
             name: 'Sangat Puas',
-            // y: 0    
+            // y: 0
         }, {
             name: 'Puas',
             // y: 0
@@ -158,7 +162,7 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-export{
+export {
     grafikPie,
     grafikBar
 }

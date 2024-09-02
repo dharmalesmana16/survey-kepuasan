@@ -20,7 +20,7 @@ class videoController extends Controller
     public function index()
     {
         $data = [
-            "data" => $this->data::all()
+            "data" => $this->data::all(),
         ];
         return view('backend/video/index', $data);
     }
@@ -28,10 +28,10 @@ class videoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function new()
+    public function new ()
     {
         $data = [
-            "title" => "Create Layanan"
+            "title" => "Create Video",
         ];
         return view('backend/video/create', $data);
     }
@@ -57,18 +57,32 @@ class videoController extends Controller
     public function edit(groupModel $groupModel)
     {
         $data = [
-            "title" => "Update Layanan"
+            "title" => "Update Layanan",
+            "res" => $this->data->getData(1),
 
         ];
-        return view("backend/layanan/update", $data);
+        return view("backend/video/edit", $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, groupModel $groupModel)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $this->data::find($id);
+        $data->id = $request->id;
+        $data->judul_video = $request->judul_video;
+        if ($request->file_video) {
+            $videoName = time() . "-" . $data->judul_video . "." . $request->file('file_video')->getClientOriginalExtension();
+            $data->file_video = $videoName;
+        }
+        // $data->icon = $request->icon;
+        $req = $data->save();
+        if ($req) {
+            return response()->json([
+                "msg" => "Update Successfully !",
+            ], 200);
+        }
     }
 
     /**

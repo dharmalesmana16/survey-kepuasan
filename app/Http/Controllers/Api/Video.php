@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\groupModel;
 use App\Models\videoModel;
-use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class Video extends Controller
 {
@@ -24,7 +21,7 @@ class Video extends Controller
             return response()->json($data);
         } else {
             return response()->json([
-                "msg" => "no data"
+                "msg" => "no data",
             ]);
         }
     }
@@ -35,7 +32,7 @@ class Video extends Controller
             return response()->json($data);
         } else {
             return response()->json([
-                "msg" => "no data"
+                "msg" => "no data",
             ]);
         }
     }
@@ -55,13 +52,24 @@ class Video extends Controller
         if ($resp) {
 
             return response()->json([
-                "msg" => "success"
+                "msg" => "success",
             ], 201);
         }
     }
     public function update(Request $request, $id)
     {
         $data = $this->data::find($id);
+
+        if ($request->file_video) {
+            $exists = Storage::disk('public')->exists("{$data->file_video}");
+            if ($exists) {
+                Storage::disk('public')->delete("{$data->file_video}");
+            }
+            $videoName = time() . "-" . $request->judul_video . "." . $request->file('file_video')->getClientOriginalExtension();
+            $data->file_video = $videoName;
+            Storage::disk('public')->put($videoName, file_get_contents($request->file_video));
+
+        }
         $data->id = $request->id;
         $data->judul_video = $request->judul_video;
         // $data->icon = $request->icon;

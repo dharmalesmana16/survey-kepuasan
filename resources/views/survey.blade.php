@@ -2,7 +2,10 @@
 @section('content')
     <?php
     $apiURL = collect(request()->segments())->last();
+    // echo $apiURL;
     ?>
+<div class="secondBody">
+
 
     <div class="d-flex justify-content-center">
         <div>
@@ -50,77 +53,78 @@
 
     </form>
 
-    <script>
-        $(document).ready(function() {
-            setTimeout(() => {
-                window.location.href = '/kioskvideo'
-            }, 30000);
-        });
-        $('.submitJawaban').change(function(e) {
-            e.preventDefault();
-
-            let strAnswer = "";
-            // let ele = $('input[name="answer"]:checked');
-            let val = $('input[name="jawaban"]:checked').val();
-            if (val == 5) {
-                strAnswer = "Sangat Puas"
-            } else if (val == 4) {
-                strAnswer = "Puas"
-            } else if (val == 3) {
-                strAnswer = "Cukup Puas"
-            } else if (val == 2) {
-                strAnswer = "Kurang Puas"
+</div>
+@endsection()
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+    // $(document).ready(function() {
+    // let timerVideo = 1000;
+    // let currentURL = window.location.pathname;
+    // let arrURL = currentURL.split("/");
+    // console.log(arrURL);
+    setTimeout(() => {
+            window.location.href = '/kioskvideo'
+            }, 30000 );
+    $('.submitJawaban').change(function(e) {
+        e.preventDefault();
+        let strAnswer = "";
+        let val = $('input[name="jawaban"]:checked').val();
+        if (val == 5) {
+            strAnswer = "Sangat Puas"
+        } else if (val == 4) {
+            strAnswer = "Puas"
+        } else if (val == 3) {
+            strAnswer = "Cukup Puas"
+        } else if (val == 2) {
+            strAnswer = "Kurang Puas"
+        } else {
+            strAnswer = "Buruk"
+        }
+        Swal.fire({
+            title: strAnswer,
+            text: "Apakah anda yakin memilih jawaban ini ? ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Kirim',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/responden',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: $('.submitAnswer').serialize(),
+                    beforeSend: function() {
+                        Swal.fire({
+                            title: 'Mohon Tunggu Sebentar !',
+                            allowOutsideClick: false,
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            onBeforeOpen: () => {
+                                Swal.showLoading()
+                            },
+                        });
+                    },
+                    success: function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Terimakasih Atas Jawaban anda',
+                            showConfirmButton: false
+                        });
+                        setTimeout(function() { // wait for 1 secs(2)
+                            location.reload(); // then reload the page.(3)
+                        }, 1000);
+                    }
+                });
             } else {
-                strAnswer = "Buruk"
+                $('input[name="jawaban"]').prop("checked", false)
             }
-            Swal.fire({
-                title: strAnswer,
-                text: "Apakah anda yakin memilih jawaban ini ? ",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Kirim',
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/responden',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: $('.submitAnswer').serialize(),
-                        beforeSend: function() {
-                            Swal.fire({
-                                title: 'Mohon Tunggu Sebentar !',
-                                allowOutsideClick: false,
-                                showCancelButton: false,
-                                showConfirmButton: false,
-
-                                onBeforeOpen: () => {
-                                    Swal.showLoading()
-                                },
-                            });
-                        },
-                        success: function() {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Terimakasih Atas Jawaban anda',
-                                showConfirmButton: false
-                            });
-                            setTimeout(function() { // wait for 1 secs(2)
-                                location.reload(); // then reload the page.(3)
-                            }, 1000);
-                        }
-                    });
-
-                } else {
-                    $('input[name="jawaban"]').prop("checked", false)
-
-                }
-            })
         })
-    </script>
-@endsection
+    })
+},false);
+</script>

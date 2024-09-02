@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css']) <!-- Styles -->
 </head>
 
@@ -24,5 +24,4 @@
     <x-footer />
 
 </body>
-
 </html>

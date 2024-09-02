@@ -11,4 +11,13 @@ class videoModel extends Model
     public $table = "tb_video";
     protected $guarded = [];
     public $timestamps = true;
+    public function getData($id = false)
+    {
+        if ($id === false) {
+            return $this::all();
+        } else {
+
+            return $this->where("id", $id)->first();
+        }
+    }
 }

@@ -6,13 +6,17 @@
 
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import $ from 'jquery';
+import 'flatpickr/dist/plugins/monthSelect/style.css'
+import 'flatpickr/dist/flatpickr.min.css'
 // import Highcharts from 'highcharts';
-// window.dataTable =jqueryDataTables
+import flatpickr from 'flatpickr';
+// window.dataTable =jqueryDataTables\
+import * as bootstrap from 'bootstrap';
+import jQuery from 'jquery';
+window.$ = jQuery;
 window.Swal = Swal;
 // window.FormData = new FormData;
 window.axios = axios;
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 function updateClock() {
@@ -43,11 +47,11 @@ function updateClock() {
     // $("#hari").html(hari[day]);
 }
 // $(document).ready(function () {
-    updateClock()
+updateClock()
 
-    setInterval(() => {
-        updateClock()
-    }, 1000);
+setInterval(() => {
+    updateClock()
+}, 1000);
 // });
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

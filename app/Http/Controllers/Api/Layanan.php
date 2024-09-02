@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\groupModel;
-use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -23,7 +22,7 @@ class Layanan extends Controller
             return response()->json($data);
         } else {
             return response()->json([
-                "msg" => "no data"
+                "msg" => "no data",
             ]);
         }
     }
@@ -34,7 +33,7 @@ class Layanan extends Controller
             return response()->json($data);
         } else {
             return response()->json([
-                "msg" => "no data"
+                "msg" => "no data",
             ]);
         }
     }
@@ -55,7 +54,7 @@ class Layanan extends Controller
         if ($resp) {
 
             return response()->json([
-                "msg" => "success"
+                "msg" => "success",
             ], 201);
         }
     }
@@ -63,8 +62,17 @@ class Layanan extends Controller
     {
         $data = $this->data::find($id);
         $data->id = $request->id;
-        $data->nama_layanan = $request->nama_layanan;
-        $data->icon = $request->icon;
+        $data->nama_pelayanan = $request->nama_layanan;
+        if ($request->icon) {
+            $exists = Storage::disk('public')->exists("{$data->icon}");
+            if ($exists) {
+                Storage::disk('public')->delete("{$data->icon}");
+            }
+            $iconName = time() . "-" . $request->judul_video . "." . $request->file('icon')->getClientOriginalExtension();
+            $data->icon = $iconName;
+            Storage::disk('public')->put($iconName, file_get_contents($request->icon));
+
+        }
         $req = $data->save();
         if ($req) {
             return response()->json([

@@ -11,4 +11,12 @@ class groupModel extends Model
     protected $table = 'tb_group';
     protected $guarded = [];
     public $timestamps = true;
+    public function getData($id = false)
+    {
+        if ($id === false) {
+            return $this::all();
+        } else {
+            return $this->where("id", $id)->first();
+        }
+    }
 }

@@ -85,3 +85,10 @@
         </div>
     </section>
 @endsection
+<script>
+        document.addEventListener('DOMContentLoaded',function(){
+
+    flatpickr('.tanggalAwal', tanggal_mulai);
+
+        },false);
+</script>

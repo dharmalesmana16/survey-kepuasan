@@ -12,33 +12,26 @@
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="/css/main/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/lineicons.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/plugins/monthSelect/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/plugins/monthSelect/index.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    {{-- <script src="/js/highchart/code/highcharts.js"></script>
-    <script src="/js/highchart/code/highcharts-more.js"></script> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
-        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-    {{-- <script type="text/javascript" src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.min.js"></script> --}}
-    {{-- <script type="text/javascript" src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script> --}}
-    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    {{-- <script src="sweetalert2.all.min.js"></script> --}}
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"> --}}
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
+    {{-- <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet'> --}}
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/plugins/monthSelect/style.css"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.min.css" /> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest/dist/plugins/monthSelect/index.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> --}}
+
+    {{-- <script src="https://code.highcharts.com/stock/modules/exporting.js"></script> --}}
+    {{-- <script src="https://code.highcharts.com/stock/modules/export-data.js"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
+    {{-- <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" /> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
 
     @vite(['resources/sass/app.scss', 'resources/css/dashboard.css', 'resources/css/main.css', 'resources/js/main.js', 'resources/js/app.js', 'resources/js/api.js']) <!-- Styles -->
 </head>
 
-<body class="">
+<body class="mainBody">
 
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper overflow-hidden aside">
@@ -68,8 +61,8 @@
                     </a>
                 </li>
             </ul>
-            <ul class="navMenus">
-                <li class="nav-item ">
+            {{-- <ul class="navMenus">
+                <li class="nav-item disabled ">
                     <a href="{{ url('/dashboard/question') }}" class="active text-main">
                         <span class="icon">
                             <i class="fa-sharp fa-solid fa-gauge"></i>
@@ -77,7 +70,7 @@
                         Pertanyaan
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
             <ul class="navMenus">
                 <li class="nav-item ">
                     <a href="{{ url('/dashboard/layanan') }}" class="active text-main">
@@ -88,7 +81,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="navMenus">
+            {{-- <ul class="navMenus">
                 <li class="nav-item ">
                     <a href="{{ url('/dashboard/user') }}" class="active text-main">
                         <span class="icon">
@@ -97,7 +90,7 @@
                         Manajemen User
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
             <ul class="navMenus">
                 <li class="nav-item ">
                     <a href="{{ url('/dashboard/video') }}" class="active text-main">
@@ -105,6 +98,16 @@
                             <i class="fa-sharp fa-solid fa-gauge"></i>
                         </span>
                         Manajemen Video
+                    </a>
+                </li>
+            </ul>
+            <ul class="navMenus">
+                <li class="nav-item ">
+                    <a href="{{ url('/dashboard/laporan') }}" class="active text-main">
+                        <span class="icon">
+                            <i class="fa-sharp fa-solid fa-gauge"></i>
+                        </span>
+                        Laporan
                     </a>
                 </li>
             </ul>
@@ -132,7 +135,7 @@
                                 <!-- <img src="/images/jbt.png" alt="logo" class="img-fluid" style="width:10%" /> -->
 
                             </div>
-
+                            <a href="/" >Kembali ke halaman survey </a>
                         </div>
 
                     </div>
@@ -213,11 +216,11 @@
 </body>
 
 </html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
     integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" type="text/css"
-    href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
-<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+{{-- <link rel="stylesheet" type="text/css"
+    href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" /> --}}
+{{-- <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script> --}}
 {{-- <script src="/js/moment.min.js"></script> --}}
 {{-- <script src="/js/main.js"></script> --}}

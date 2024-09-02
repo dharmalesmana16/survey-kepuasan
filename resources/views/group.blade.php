@@ -2,7 +2,7 @@
 @section('content')
     <div class="d-flex justify-content-center">
         <div>
-            <h3 class=" text-center ask p-4 ">
+            <h3 class="text-center ask p-4 fw-bold">
                 Pilih Jenis Layanan
             </h3>
         </div>
@@ -10,13 +10,13 @@
     <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
         @foreach ($dataLayanan as $res)
             <div class="col">
-                <a href="/survey/{{ $res['slug'] }}">
-                    <div class="card myCard" style="border-radius: 40px">
-                        <div class="text-center">
-                            <img src="/storage/{{ $res['icon'] }}" width="250" class="">
+                <a href="/survey/{{ $res['slug'] }}" class="text-decoration-none">
+                    <div class="card myCard p-5" style="border-radius: 40px">
+                        <div class="text-center h-100">
+                            <img src="/storage/{{ $res['icon'] }}" width="250" class="img-fluid">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title display-5 text-center ">{{ $res['nama_pelayanan'] }}</h5>
+                            <p class="card-title display-6 text-center ">{{ $res['nama_pelayanan'] }}</p>
 
                         </div>
                     </div>

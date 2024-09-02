@@ -5,39 +5,66 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\groupModel;
 use App\Models\respondenModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Mike42\Escpos\Printer;
-use Illuminate\Support\Facades\Storage;
-use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
-use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\Printer;
 
 class Responden extends Controller
 {
     protected $data;
+    protected $pdfReport;
     public function __construct()
     {
         $this->data = new respondenModel();
+        // $this->pdfReport = new Pdf();
+
     }
     public function index(Request $request)
     {
+        $reportOpt = $request->input("reportOpt");
         $startDate = $request->input("startDate");
         $grouping = $request->input("grouping");
         $tanggalAwal = $request->input('tanggalAwal');
         $tanggalAkhir = $request->input("tanggalAkhir");
+        if ($reportOpt == "monthly") {
+            $date = $request->input('date');
+            $groupId = $request->input('group_id');
+            $conv = explode(" ", $date);
+            $month = $conv[0]; // monthDATE_FORMAT(created_at,'%H:%i:%S')
+            $year = $conv[1]; // year
+            $nmonth = date("m", strtotime($month));
+            if ($groupId !== "all") {
+
+                $data = DB::table("tb_responden")->selectRaw("jawaban as totalJawaban,
+                DATE_FORMAT(created_at,'%d %M %Y %H:%i:%S') as waktu")->whereRaw("group_id = '$groupId' and MONTH(created_at) = '$nmonth' and
+                YEAR(created_at) = '$year'")->get()->toArray();
+            }
+            $data = DB::table("tb_responden")->selectRaw("jawaban as totalJawaban,
+                DATE_FORMAT(created_at,'%d %M %Y %H:%i:%S') as waktu")->whereRaw("MONTH(created_at) = '$nmonth' and
+                YEAR(created_at) = '$year'")->get()->toArray();
+
+            // $data = DB::table("tb_responden")->selectRaw("count(jawaban)
+            //     ,DATE_FORMAT(created_at,'%H:%i:%S %d %M %Y') as waktu,date(created_at)")->whereRaw("MONTH(created_at) = '$nmonth' and
+            //    YEAR(created_at) = '$year'")->groupByRaw('date(created_at)')->get()->toArray();
+            Pdf::set_base_path("/public");
+            $pdf = Pdf::loadView('backend.laporan.templatePDF', ["data" => $data, "countResponden" => "1"]);
+            // $pdf->setPaper('A4', 'potrait');
+            // $pdf->render();
+            return $pdf->download("Laporan.pdf");
+        }
         if ($startDate == "today") {
             $data = DB::table('tb_responden')->selectRaw("komentar,jawaban")->whereRaw('date(created_at) = CURRENT_DATE()')->orderByDesc('jawaban')->get();
             return response()->json([
-                "data" => $data
+                "data" => $data,
             ]);
         } else if ($grouping == "yes") {
 
             $data = DB::table('tb_responden')->selectRaw("jawaban,count(jawaban) as totalGrouping")->whereRaw("date(created_at) = CURRENT_DATE()")
                 ->groupBy("jawaban")->orderByDesc("jawaban")->get();
             return response()->json([
-                "data" =>  $data
+                "data" => $data,
             ]);
             // return $data;
         } else if ($tanggalAwal != null && $tanggalAkhir != null && $grouping == "true") {
@@ -48,18 +75,18 @@ class Responden extends Controller
                 ->groupBy("jawaban")->orderByDesc("jawaban")->get();
             return response()->json([
                 "data" => $data,
-                "grouping" => $grouping
+                "grouping" => $grouping,
             ]);
         }
         if ($startDate == "all") {
             $data = $this->data::all();
             if ($data) {
                 return response()->json([
-                    "data" => $data
+                    "data" => $data,
                 ]);
             } else {
                 return response()->json([
-                    "msg" => "no data"
+                    "msg" => "no data",
                 ]);
             }
         }
@@ -71,7 +98,7 @@ class Responden extends Controller
             return response()->json($data);
         } else {
             return response()->json([
-                "msg" => "no data"
+                "msg" => "no data",
             ]);
         }
     }
@@ -87,7 +114,7 @@ class Responden extends Controller
 
         $dataLayanan = new groupModel();
         $group_id = $request->input('idLayanan');
-        $idLayanan = $dataLayanan::where('nama_pelayanan', $group_id)->first();
+        $idLayanan = $dataLayanan::where('slug', $group_id)->first();
         $jawaban = $request->input('jawaban');
         $jawabanA = 0;
         $jawabanB = 0;
@@ -113,7 +140,8 @@ class Responden extends Controller
             $komentar = $dataAnswer[4];
             $jawabanE = 1;
         }
-        // function indonesiaFormat($waktu){
+        // function indonesiaFormat($waktu)
+        // {
         $date = date('w-d-n-Y-H:i:s');
 
         $hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
@@ -133,11 +161,10 @@ class Responden extends Controller
         );
         $res = explode("-", $date);
 
-        // $response =  $hari[$res] . " ". $res[1] ." " .$bulan[$res[2]] . " " . $res[3] . " ". $res[4];
+        $response = $hari[$res] . " " . $res[1] . " " . $bulan[$res[2]] . " " . $res[3] . " " . $res[4];
         // }
 
-
-        $connector = new WindowsPrintConnector("POS-80C"); // on mac File
+        $connector = new WindowsPrintConnector("POS-80C"); // on mac OS using FilePrintConnector
         // $logo = EscposImage::load("/logonew.png",false);
         $printer = new Printer($connector);
 
@@ -189,9 +216,8 @@ class Responden extends Controller
         ];
         $resp = $this->data->create($data);
         if ($resp) {
-
             return response()->json([
-                "msg" => "success"
+                "msg" => "success",
             ], 201);
         }
     }

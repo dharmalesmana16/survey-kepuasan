@@ -5,16 +5,17 @@ use App\Http\Controllers\Api\Question;
 use App\Http\Controllers\Api\Responden;
 use App\Http\Controllers\Api\Users;
 use App\Http\Controllers\Api\Video;
-use App\Http\Controllers\groupController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\questionController;
-use App\Http\Controllers\QuestionModelController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\groupController;
+use App\Http\Controllers\questionController;
+use App\Http\Controllers\reportController;
 use App\Http\Controllers\respondenController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\videoController;
 use App\Models\groupModel;
+use App\Models\videoModel;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 Route::get('/survey/{slug}', function () {
     return view('survey');
@@ -32,17 +33,20 @@ Route::get('/survey/{slug}', function () {
 Route::get('/', function () {
     $dataLayanan = new groupModel();
     $data = [
-        "dataLayanan" => $dataLayanan::all()
+        "dataLayanan" => $dataLayanan::all(),
     ];
     return view('group', $data);
 });
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('authku')->name('dashboard');
 Route::get('/kioskvideo', function () {
-    return view('video');
+    $videoModel = new videoModel();
+    $data = [
+        "data" => $videoModel->getData(1),
+    ];
+    return view('video', $data);
 });
 Route::post('/ceklogin', [AuthController::class, "authenticate"]);
 // Route::post('', 'authenticate')->name('signin');
@@ -51,6 +55,14 @@ Route::get('/signin', [AuthController::class, 'index']);
 // Route::post('/auth', [AuthController::class, 'authenticate']);
 Route::controller(groupController::class)->prefix('dashboard/layanan')->group(function () {
     Route::get('', 'index')->name('layanan');
+    Route::get('show/{slug}', 'show');
+    Route::get('new', 'new');
+    Route::post('new', 'new');
+    Route::get('update/{slug}', 'edit');
+    Route::put('update/{slug}', 'update');
+});
+Route::controller(reportController::class)->prefix('dashboard/laporan')->group(function () {
+    Route::get('', 'index');
     Route::get('show/{slug}', 'show');
     Route::get('new', 'new');
     Route::post('new', 'new');
@@ -89,12 +101,16 @@ Route::controller(videoController::class)->prefix('dashboard/video')->group(func
     Route::get('update/{slug}', 'edit');
     Route::put('update/{slug}', 'update');
 });
+Route::get('/generatereport', function () {
 
+    return view("backend.laporan.templatePDF");
+});
 Route::resource('api/layanan', Layanan::class);
 Route::resource('api/question', Question::class);
 Route::resource('api/responden', Responden::class);
 Route::resource('api/users', Users::class);
 Route::resource('api/video', Video::class);
-
-// 
+Route::post('video/update/{meta}', [Video::class, "update"]);
+Route::post('layanan/update/{meta}', [Layanan::class, "update"]);
+//
 // require __DIR__ . '/auth.php';

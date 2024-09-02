@@ -54,6 +54,7 @@
         </form>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded",function(){
         $('.createdata').submit(function(e) {
             e.preventDefault();
             $.ajax({
@@ -94,5 +95,6 @@
                 }
             });
         })
+    })
     </script>
 @endsection

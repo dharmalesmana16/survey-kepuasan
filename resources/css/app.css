@@ -1,18 +1,20 @@
-
-.answerCard:hover{
+.answerCard:hover {
     border: 1px solid blue;
     transform: scale(1.04);
-    transition: transform .5s ease;
-
+    transition: transform 0.5s ease;
 }
 .ask {
     border: 4px solid gray;
     border-radius: 40px;
     justify-content: center !important;
 }
-.mainColor{
+.ask:hover {
+    transform: scale(1.04);
+    transition: transform 0.5s ease;
+}
+.mainColor {
     background-color: #f3343e;
 }
-.secondColor{
+.secondColor {
     background-color: #fefd3c;
 }

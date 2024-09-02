@@ -28,14 +28,19 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @foreach ($data as $res)
             <div class="col">
-                <div class="card myCard">
+                <div class="card ">
                     <div class="text-center">
 
                         <img src="/storage/{{ $res['icon'] }}" width="200" class="img-fluid">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body tex">
                         <h3 class=" text-center">{{ $res['nama_pelayanan'] }}</h3>
+                    </div>
+                    <div class="card-footer text-end">
 
+                        <a href='/dashboard/layanan/update/{{ $res['id'] }}' class="btn btn-md btn-primary ">
+                            Edit Data
+                        </a>
                     </div>
                 </div>
             </div>

@@ -36,7 +36,6 @@
                             <div class="d-flex">
                                 <div class="w-100">
                                 </div>
-
                             </div>
                             <form action="/ceklogin" method="post" class="submitLogin">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -62,15 +61,10 @@
             </div>
         </div>
     </section>
-
-
-
 </body>
 <script>
     $('.submitLogin').submit(function(e) {
         e.preventDefault();
-
-
         $.ajax({
             type: 'POST',
             url: $(this).attr('action'),
@@ -91,10 +85,8 @@
                 $('.btnLogin').html('Submit');
             },
             success: function(response) {
-                // console.log(response)
                 if (response.status == 1) {
                     setTimeout(() => {
-
                         window.location.href = '/dashboard'
                     }, 1000);
                 }

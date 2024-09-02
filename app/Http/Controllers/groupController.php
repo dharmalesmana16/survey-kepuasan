@@ -19,7 +19,7 @@ class groupController extends Controller
     public function index()
     {
         $data = [
-            "data" => $this->data::all()
+            "data" => $this->data::all(),
         ];
         return view('backend/layanan/index', $data);
     }
@@ -27,10 +27,10 @@ class groupController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function new()
+    public function new ()
     {
         $data = [
-            "title" => "Create Layanan"
+            "title" => "Create Layanan",
         ];
         return view('backend/layanan/create', $data);
     }
@@ -53,13 +53,14 @@ class groupController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(groupModel $groupModel)
+    public function edit(Request $request, $id)
     {
         $data = [
-            "title" => "Update Layanan"
+            "title" => "Update Layanan",
+            "data" => $this->data->getData($id),
 
         ];
-        return view("backend/layanan/update", $data);
+        return view("backend/layanan/edit", $data);
     }
 
     /**
